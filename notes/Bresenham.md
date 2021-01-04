@@ -75,11 +75,11 @@
 
   ```c++
   union {
-  		struct {
-  			unsigned char b, g, r, a;
-  		};
-  		unsigned char raw[4];
-  		unsigned int val;
+  	struct {
+  		unsigned char b, g, r, a;
+  	};
+  	unsigned char raw[4];
+  	unsigned int val;
   };
   int bytespp;
   ```
