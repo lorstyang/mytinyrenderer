@@ -18,18 +18,20 @@ Phongshading逐像素着色，计算每个像素的光照
 
 ## flat shading
 
-* ``` c++
-Vec2f bboxmin(numeric_limits<float>::max(), numeric_limits<float>::max());
-Vec2f bboxmax(-numeric_limits<float>::max(), -numeric_limits<float>::max());
-for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 2; j++) {
-        //齐次坐标
-        bboxmin[j] = std::min(bboxmin[j], pts[i][j] / pts[i][3]);
-        bboxmax[j] = std::max(bboxmax[j], pts[i][j] / pts[i][3]);
-    }
-}
-  ```
-  
+* code
+
+   ``` c++
+  Vec2f bboxmin(numeric_limits<float>::max(), numeric_limits<float>::max());
+  Vec2f bboxmax(-numeric_limits<float>::max(), -numeric_limits<float>::max());
+  for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 2; j++) {
+          //齐次坐标
+          bboxmin[j] = std::min(bboxmin[j], pts[i][j] / pts[i][3]);
+          bboxmax[j] = std::max(bboxmax[j], pts[i][j] / pts[i][3]);
+      }
+  }
+   ```
+
   检测时候在视野范围内的部分去掉了，不过也无所谓，本来模型的顶点是肯定在范围内的，不过在实际中是否在视野内就要涉及到模板测试了
 
 * 代码里其实每个像素都计算了一次fragmentshader，同一个三角形内的像素因为法线一样，计算得到的颜色其实是一样的，从这个角度应该可以优化一下，每个三角形只计算一次FS，后面的直接用就可以了。
